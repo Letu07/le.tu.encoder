@@ -1,2 +1,4 @@
-package ua.javarush.encoder.cipher;public class CaesarCipher {
+package ua.javarush.encoder.cipher;
+
+public class CaesarCipher {
 }

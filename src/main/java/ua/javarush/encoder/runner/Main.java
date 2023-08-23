@@ -1,4 +1,4 @@
 package ua.javarush.encoder.runner;
 
-public class CaesarApplication {
+public class Main {
 }

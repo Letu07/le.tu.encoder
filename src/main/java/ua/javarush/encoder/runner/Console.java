@@ -1,2 +1,4 @@
-package ua.javarush.encoder.runner;public class Console {
+package ua.javarush.encoder.runner;
+
+public class Console {
 }

@@ -1,2 +1,4 @@
-package ua.javarush.encoder.IO;public class FileService {
+package ua.javarush.encoder.IO;
+
+public class FileService {
 }

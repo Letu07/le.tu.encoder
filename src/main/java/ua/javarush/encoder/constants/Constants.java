@@ -1,2 +1,5 @@
-package ua.javarush.encoder.constants;public class Constants {
+package ua.javarush.encoder.constants;
+
+public class Constants {
+
 }
