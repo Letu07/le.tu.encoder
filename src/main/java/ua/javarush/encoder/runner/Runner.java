@@ -19,8 +19,8 @@ public class Runner {
 
     public void run(String[] args) throws IOException {
 
-        if (args.length < 3) {
-            System.out.println("Недостаточно аргументов.");
+        if (args.length == 0) {
+            System.out.println("Должно быть передано 3 аргумента:");
             return;
         } else {
             String command = args[0];
