@@ -1,6 +1,6 @@
 package ua.javarush.encoder.runner;
 
-import ua.javarush.encoder.IO.FileService;
+import ua.javarush.encoder.io.FileService;
 import ua.javarush.encoder.cipher.CaesarCipher;
 import ua.javarush.encoder.commands.Commands;
 
@@ -20,7 +20,7 @@ public class Runner {
     public void run(String[] args) throws IOException {
 
         if (args.length == 0) {
-            System.out.println("Должно быть передано 3 аргумента:");
+            System.out.println("Three arguments must be provided:");
             return;
         } else {
             String command = args[0];
@@ -28,20 +28,27 @@ public class Runner {
             int key = Integer.parseInt(args[2]);
 
             Commands commands = Commands.valueOf(command.toUpperCase());
-            if (Commands.ENCRYPT.equals(commands)) {
-                String plaintext = fileService.read(filepath);
-                String encryptedText = cipher.encoder(plaintext, key);
-                fileService.write(Path.of("D:\\Programms\\IDEA_project\\le.tu.encoder\\src\\main\\resources.EncodedText"), encryptedText);
-                System.out.println("Текст успешно зашифрован.");
-            } else if (Commands.DECRYPT.equals(command)) {
-                String encryptedText = fileService.read(filepath);
-                String decryptedText = cipher.decoder(encryptedText, key);
-                fileService.write(Path.of("new path"), decryptedText);
-                System.out.println("Текст успешно дешифрован.");
-            } else if (Commands.BRUTE_FORCE.equals(command)) {
-                System.out.println("Неизвестная команда.");
+
+            if (!fileService.isFileExist(filepath)) {
+                System.err.println("The specified file does not exist.");
             } else {
-                System.out.println("Неизвестная команда.");
+
+
+                if (Commands.ENCRYPT.equals(commands)) {
+                    String plaintext = fileService.read(filepath);
+                    String encryptedText = cipher.encoder(plaintext, key);
+                    fileService.write(Path.of(fileService.generateFileName(filepath, Commands.ENCRYPT)), encryptedText);
+                    System.out.println("The text has been successfully encrypted.");
+                } else if (Commands.DECRYPT.equals(commands)) {
+                    String encryptedText = fileService.read(filepath);
+                    String decryptedText = cipher.decoder(encryptedText, key);
+                    fileService.write(Path.of(fileService.generateFileName(filepath, Commands.DECRYPT)), decryptedText);
+                    System.out.println("Text successfully decrypted.");
+                } else if (Commands.BRUTE_FORCE.equals(commands)) { //TODO
+//Тут должен быть код
+                } else {
+                    System.out.println("Unknown command.");
+                }
             }
         }
     }
