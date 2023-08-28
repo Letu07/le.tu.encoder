@@ -6,7 +6,7 @@ import ua.javarush.encoder.constants.Constants;
 import ua.javarush.encoder.runner.Runner;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Application {
     public static void main(String[] args) throws IOException {

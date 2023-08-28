@@ -20,7 +20,7 @@ public class Runner {
     public void run(String[] args) throws IOException {
 
         if (args.length == 0) {
-            System.out.println("Three arguments must be provided:");
+            System.out.println("Minimum two arguments must be provided:");
             return;
         } else {
             String command = args[0];

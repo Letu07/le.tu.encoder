@@ -15,7 +15,10 @@ public class CaesarCipher {
             boolean isUppercase = Character.isUpperCase(character);
             character = Character.toLowerCase(character);
             int originalIndex = alphabet.indexOf(character);
-            int newIndex = (originalIndex + key + alphabet.size()) % alphabet.size();
+            int newIndex = (originalIndex + key) % alphabet.size();
+            if(newIndex < 0) {
+                newIndex += alphabet.size();
+            }
             char newChar = alphabet.get(newIndex);
 
             if (isUppercase) {

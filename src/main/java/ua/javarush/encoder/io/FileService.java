@@ -25,13 +25,13 @@ public class FileService {
 
         switch (commands) {
             case ENCRYPT:
-                newFileName = fileName.replace(".txt", "ENCRYPTED.txt");
+                newFileName = fileName.replace(".txt", "[ENCRYPTED].txt");
                 break;
             case DECRYPT:
-                newFileName = fileName.replace(".txt", "DECRYPTED.txt");
+                newFileName = fileName.replace("[ENCRYPTED].txt", "[DECRYPTED].txt");
                 break;
             case BRUTE_FORCE:
-                newFileName = fileName.replace(".txt", "BRUTE_FORCED.txt");
+                newFileName = fileName.replace(".txt", "[BRUTE_FORCED].txt");
                 break;
         }
 
