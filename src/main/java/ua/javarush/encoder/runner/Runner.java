@@ -19,6 +19,10 @@ public class Runner {
     public void run(String[] args) throws IOException {
         if (args.length < 2) {
             System.out.println("Minimum two arguments must be provided:");
+            System.out.println("1. Write the command: encrypt | decrypt | brute_force");
+            System.out.println("2. Write path to the file:");
+            System.out.println("3. Write key:");
+
         } else {
             String command = args[0];
             Path filepath = Path.of(args[1]);
