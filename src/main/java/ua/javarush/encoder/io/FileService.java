@@ -1,6 +1,6 @@
 package ua.javarush.encoder.io;
 
-import ua.javarush.encoder.commands.Commands;
+import ua.javarush.encoder.commands.Command;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class FileService {
         Files.writeString(path, text);
     }
 
-    public String generateFileName(Path filePath, Commands commands) {
+    public String generateFileName(Path filePath, Command commands) {
         String fileName = filePath.getFileName().toString();
         String newFileName = null;
 
@@ -31,7 +31,7 @@ public class FileService {
                 newFileName = fileName.replace("[ENCRYPTED].txt", "[DECRYPTED].txt");
                 break;
             case BRUTE_FORCE:
-                newFileName = fileName.replace(".txt", "[BRUTE_FORCED].txt");
+                newFileName = fileName.replace("[ENCRYPTED].txt", "[BRUTE_FORCED].txt");
                 break;
         }
 

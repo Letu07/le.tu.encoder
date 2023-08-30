@@ -3,7 +3,6 @@ package ua.javarush.encoder.cipher;
 import java.util.ArrayList;
 
 public class CaesarCipher {
-
     private final ArrayList<Character> alphabet;
 
     public CaesarCipher(ArrayList<Character> alphabet) {
@@ -16,7 +15,7 @@ public class CaesarCipher {
             character = Character.toLowerCase(character);
             int originalIndex = alphabet.indexOf(character);
             int newIndex = (originalIndex + key) % alphabet.size();
-            if(newIndex < 0) {
+            if (newIndex < 0) {
                 newIndex += alphabet.size();
             }
             char newChar = alphabet.get(newIndex);
@@ -40,13 +39,25 @@ public class CaesarCipher {
         return encryptedText.toString();
     }
 
-    public String decoder(String text, int key) {
+    public String decoder(String encryptedText, int key) {
         StringBuilder decryptedText = new StringBuilder();
 
-        for (char character : text.toCharArray()) {
+        for (char character : encryptedText.toCharArray()) {
             decryptedText.append(shiftCharacter(character, -key));
         }
 
         return decryptedText.toString();
+    }
+
+    public String bruteForceDecrypt(String encryptedText) {
+        String decryptedText = "";
+
+        for (int key = 1; key <= alphabet.size(); key++) {
+            decryptedText = decoder(encryptedText, key);
+            if (decryptedText.contains("the")) {
+                break;
+            }
+        }
+        return decryptedText;
     }
 }
