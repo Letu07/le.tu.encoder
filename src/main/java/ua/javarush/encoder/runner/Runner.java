@@ -7,7 +7,6 @@ import ua.javarush.encoder.commands.Command;
 import java.io.IOException;
 import java.nio.file.Path;
 
-
 public class Runner {
     private final CaesarCipher cipher;
     private final FileService fileService;
