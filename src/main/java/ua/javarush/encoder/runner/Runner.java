@@ -17,45 +17,53 @@ public class Runner {
     }
 
     public void run(String[] args) throws IOException {
+
         if (args.length < 2) {
-            System.out.println("Minimum two arguments must be provided:");
-            System.out.println("1. Write the command: encrypt | decrypt | brute_force");
+            System.err.println("NOT ENOUGH ARGUMENTS PROVIDED");
+            System.out.println("1. Write one of the commands: encrypt | decrypt | brute_force");
             System.out.println("2. Write path to the file:");
             System.out.println("3. Write key:");
+            return;
+        }
 
-        } else {
+        Command cmd;
+        int key = -1;
+        try {
             String command = args[0];
-            Path filepath = Path.of(args[1]);
+            cmd = Command.valueOf(command.toUpperCase());
 
-            Command commands = Command.valueOf(command.toUpperCase());
+            if (args.length > 2) {
+                key = Integer.parseInt(args[2]);
+            }
 
-            if (!fileService.isFileExist(filepath)) {
-                System.err.println("The specified file does not exist.");
-            } else {
-                int key = -1;
-                if (args.length > 2) {
-                    key = Integer.parseInt(args[2]);
-                }
-
-                if (Command.ENCRYPT.equals(commands)) {
-                    String plaintext = fileService.read(filepath);
+            Path filePath = Path.of(args[1]);
+            if (fileService.isFileExist(filePath)) {
+                if (Command.ENCRYPT.equals(cmd)) {
+                    String plaintext = fileService.read(filePath);
                     String encryptedText = cipher.encoder(plaintext, key);
-                    fileService.write(Path.of(fileService.generateFileName(filepath, Command.ENCRYPT)), encryptedText);
+                    fileService.write(Path.of(fileService.generateFileName(filePath, Command.ENCRYPT)), encryptedText);
                     System.out.println("The text has been successfully encrypted.");
-                } else if (Command.DECRYPT.equals(commands)) {
-                    String encryptedText = fileService.read(filepath);
+                } else if (Command.DECRYPT.equals(cmd)) {
+                    String encryptedText = fileService.read(filePath);
                     String decryptedText = cipher.decoder(encryptedText, key);
-                    fileService.write(Path.of(fileService.generateFileName(filepath, Command.DECRYPT)), decryptedText);
+                    fileService.write(Path.of(fileService.generateFileName(filePath, Command.DECRYPT)), decryptedText);
                     System.out.println("The text has been successfully decrypted.");
-                } else if (Command.BRUTE_FORCE.equals(commands)) {
-                    String encryptedText = fileService.read(filepath);
+                } else if (Command.BRUTE_FORCE.equals(cmd)) {
+                    String encryptedText = fileService.read(filePath);
                     String decryptedText = cipher.bruteForceDecrypt(encryptedText);
-                    fileService.write(Path.of(fileService.generateFileName(filepath, Command.BRUTE_FORCE)), decryptedText);
+                    fileService.write(Path.of(fileService.generateFileName(filePath, Command.BRUTE_FORCE)), decryptedText);
                     System.out.println("The text has been successfully decrypted by Brute Force.");
                 } else {
                     System.out.println("Unknown command.");
+                    System.out.println("1. Write one of the commands: encrypt | decrypt | brute_force");
                 }
+            } else {
+                System.err.println("THE FILE DOES NOT EXIST");
             }
+        } catch (NumberFormatException e) {
+            System.err.println("THE KEY HAS BEEN ENTERED INCORRECTLY. PLEASE ENTER A NUMBER");
+        } catch (IllegalArgumentException e) {
+            System.err.println("THE COMMAND IS UNKNOWN");
         }
     }
 }
