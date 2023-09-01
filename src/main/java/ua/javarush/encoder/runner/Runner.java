@@ -50,7 +50,7 @@ public class Runner {
                     System.out.println("The text has been successfully decrypted.");
                 } else if (Command.BRUTE_FORCE.equals(cmd)) {
                     String encryptedText = fileService.read(filePath);
-                    String decryptedText = cipher.bruteForceDecrypt(encryptedText);
+                    String decryptedText = cipher.bruteForceDecrypt(encryptedText, fileService.loadFrequencyMap());
                     fileService.write(Path.of(fileService.generateFileName(filePath, Command.BRUTE_FORCE)), decryptedText);
                     System.out.println("The text has been successfully decrypted by Brute Force.");
                 } else {
