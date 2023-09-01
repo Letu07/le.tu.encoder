@@ -50,21 +50,10 @@ public class CaesarCipher {
         return decryptedText.toString();
     }
 
-    //    public String bruteForceDecrypt(String encryptedText) {
-//        String decryptedText = "";
-//
-//        for (int key = 1; key <= alphabet.size(); key++) {
-//            decryptedText = decoder(encryptedText, key);
-//            if (decryptedText.contains("the")) {
-//                break;
-//            }
-//        }
-//        return decryptedText;
-//    }
     public String bruteForceDecrypt(String encryptedText, Map<Character, Double> frequencyMap) {
         String decryptedText = "";
         int bestKey = 0;
-        double bestScore = Double.MAX_VALUE; // Начальное лучшее значение оценки
+        double bestScore = Double.MAX_VALUE;
 
         for (int key = 1; key <= alphabet.size(); key++) {
             String candidateText = decoder(encryptedText, key);
