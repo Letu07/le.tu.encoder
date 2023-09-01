@@ -74,7 +74,7 @@ public class CaesarCipher {
 
     private double calculateScore(String text, Map<Character, Double> frequencyMap) {
 
-        int[] letterFrequency = new int[26];
+        int[] letterFrequency = new int[alphabet.size()];
         int totalLetters = 0;
 
         for (char c : text.toCharArray()) {
@@ -86,7 +86,7 @@ public class CaesarCipher {
         }
 
         double score = 0.0;
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < alphabet.size(); i++) {
             char letter = (char) ('a' + i);
             double expectedFrequency = frequencyMap.get(letter) * totalLetters;
             double observedFrequency = letterFrequency[i];
